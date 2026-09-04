@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Cloud Farm Management System</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Sidebar -->
+
+    <div class="sidebar">
+
+        <div class="logo">
+            🌾 FarmCloud
+        </div>
+
+        <button onclick="showPage('dashboard')">
+            📊 Dashboard
+        </button>
+
+        <button onclick="showPage('crops')">
+            🌱 Crops
+        </button>
+
+        <button onclick="showPage('activities')">
+            🚜 Activities
+        </button>
+
+        <button onclick="showPage('expenses')">
+            💰 Expenses
+        </button>
+
+        <button onclick="showPage('weather')">
+            ☀️ Weather
+        </button>
+
+        <div class="cloud-status">
+            ☁️ Cloud Connected
+        </div>
+
+    </div>
+
+
+    <!-- Main Content -->
+
+    <div class="main">
+
+        <!-- Header -->
+
+        <header>
+
+            <div>
+                <h1 id="pageTitle">Farm Dashboard</h1>
+                <p>Cloud Farm Management System</p>
+            </div>
+
+            <div class="profile">
+                👩‍🌾 Farm Manager
+            </div>
+
+        </header>
+
+
+        <!-- Dashboard -->
+
+        <section id="dashboard" class="page">
+
+            <div class="welcome">
+
+                <div>
+                    <h2>Welcome to FarmCloud 🌾</h2>
+
+                    <p>
+                        Manage your crops, activities and expenses
+                        from one place.
+                    </p>
+                </div>
+
+                <button class="add-button"
+                        onclick="showPage('crops')">
+                    + Add Crop
+                </button>
+
+            </div>
+
+
+            <!-- Statistics -->
+
+            <div class="cards">
+
+                <div class="card">
+                    <div class="icon">🌱</div>
+
+                    <div>
+                        <h2 id="totalCrops">3</h2>
+                        <p>Total Crops</p>
+                    </div>
+                </div>
+
+
+                <div class="card">
+                    <div class="icon">🌿</div>
+
+                    <div>
+                        <h2 id="growingCrops">2</h2>
+                        <p>Growing Crops</p>
+                    </div>
+                </div>
+
+
+                <div class="card">
+                    <div class="icon">✅</div>
+
+                    <div>
+                        <h2 id="readyCrops">1</h2>
+                        <p>Ready Crops</p>
+                    </div>
+                </div>
+
+
+                <div class="card">
+                    <div class="icon">💰</div>
+
+                    <div>
+                        <h2 id="totalExpenses">₹11,000</h2>
+                        <p>Total Expenses</p>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <!-- Dashboard Panels -->
+
+            <div class="dashboard-grid">
+
+                <div class="panel">
+
+                    <h2>Recent Activities</h2>
+
+                    <div id="recentActivities">
+
+                        <div class="activity">
+                            🚜
+                            <div>
+                                <strong>Irrigation</strong>
+                                <p>Rice • Today</p>
+                            </div>
+
+                            <span>Completed</span>
+                        </div>
+
+
+                        <div class="activity">
+                            🌱
+                            <div>
+                                <strong>Fertilizer Application</strong>
+                                <p>Tomato • Yesterday</p>
+                            </div>
+
+                            <span>Completed</span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="panel weather">
+
+                    <h2>Today's Weather</h2>
+
+                    <div class="temperature">
+                        ☀️ 29°C
+                    </div>
+
+                    <p>Partly Sunny</p>
+
+                    <hr>
+
+                    <p>💧 Humidity: 65%</p>
+
+                    <p>💨 Wind: 12 km/h</p>
+
+                    <p>🌧️ Rain Chance: 10%</p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Crops Page -->
+
+        <section id="crops" class="page hidden">
+
+            <div class="section-header">
+
+                <div>
+                    <h2>Crop Management</h2>
+                    <p>Manage your farm crops.</p>
+                </div>
+
+                <button class="add-button"
+                        onclick="openCropForm()">
+                    + Add New Crop
+                </button>
+
+            </div>
+
+
+            <!-- Add Crop Form -->
+
+            <div id="cropForm" class="form-box hidden">
+
+                <h2>Add New Crop</h2>
+
+                <input
+                    type="text"
+                    id="cropName"
+                    placeholder="Crop Name"
+                >
+
+                <input
+                    type="text"
+                    id="cropArea"
+                    placeholder="Area e.g. 5 Acres"
+                >
+
+                <select id="cropSeason">
+
+                    <option value="Kharif">
+                        Kharif
+                    </option>
+
+                    <option value="Rabi">
+                        Rabi
+                    </option>
+
+                    <option value="Summer">
+                        Summer
+                    </option>
+
+                </select>
+
+
+                <select id="cropStatus">
+
+                    <option value="Growing">
+                        Growing
+                    </option>
+
+                    <option value="Ready">
+                        Ready
+                    </option>
+
+                    <option value="Harvested">
+                        Harvested
+                    </option>
+
+                </select>
+
+
+                <button class="save-button"
+                        onclick="addCrop()">
+                    Save Crop
+                </button>
+
+            </div>
+
+
+            <!-- Crop Table -->
+
+            <div class="table-box">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+                            <th>Crop</th>
+                            <th>Area</th>
+                            <th>Season</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="cropTable">
+
+                        <tr>
+                            <td>🌾 Rice</td>
+                            <td>5 Acres</td>
+                            <td>Kharif</td>
+                            <td>
+                                <span class="status growing">
+                                    Growing
+                                </span>
+                            </td>
+
+                            <td>
+                                <button
+                                    class="delete"
+                                    onclick="deleteCrop(this)">
+                                    Delete
+                                </button>
+                            </td>
+                        </tr>
+
+
+                        <tr>
+                            <td>🍅 Tomato</td>
+                            <td>2 Acres</td>
+                            <td>Summer</td>
+
+                            <td>
+                                <span class="status ready">
+                                    Ready
+                                </span>
+                            </td>
+
+                            <td>
+                                <button
+                                    class="delete"
+                                    onclick="deleteCrop(this)">
+                                    Delete
+                                </button>
+                            </td>
+                        </tr>
+
+
+                        <tr>
+                            <td>🌾 Wheat</td>
+                            <td>4 Acres</td>
+                            <td>Rabi</td>
+
+                            <td>
+                                <span class="status growing">
+                                    Growing
+                                </span>
+                            </td>
+
+                            <td>
+                                <button
+                                    class="delete"
+                                    onclick="deleteCrop(this)">
+                                    Delete
+                                </button>
+                            </td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+        <!-- Activities Page -->
+
+        <section id="activities" class="page hidden">
+
+            <div class="section-header">
+
+                <div>
+                    <h2>Farm Activities</h2>
+
+                    <p>
+                        Track your daily farm activities.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="form-box">
+
+                <h2>Add Activity</h2>
+
+                <input
+                    type="text"
+                    id="activityName"
+                    placeholder="Activity e.g. Irrigation"
+                >
+
+                <input
+                    type="text"
+                    id="activityCrop"
+                    placeholder="Crop Name"
+                >
+
+                <input
+                    type="date"
+                    id="activityDate"
+                >
+
+                <button class="save-button"
+                        onclick="addActivity()">
+                    Add Activity
+                </button>
+
+            </div>
+
+
+            <div class="table-box">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+                            <th>Activity</th>
+                            <th>Crop</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="activityTable">
+
+                        <tr>
+
+                            <td>🚜 Irrigation</td>
+
+                            <td>Rice</td>
+
+                            <td>04-09-2026</td>
+
+                            <td>
+                                <span class="status growing">
+                                    Completed
+                                </span>
+                            </td>
+
+                            <td>
+                                <button
+                                    class="delete"
+                                    onclick="deleteActivity(this)">
+                                    Delete
+                                </button>
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+        <!-- Expenses Page -->
+
+        <section id="expenses" class="page hidden">
+
+            <div class="section-header">
+
+                <div>
+                    <h2>Farm Expenses</h2>
+
+                    <p>
+                        Track your farming expenses.
+                    </p>
+                </div>
+
+                <div class="expense-total">
+                    Total: ₹<span id="expenseAmount">
+                        11000
+                    </span>
+                </div>
+
+            </div>
+
+
+            <div class="form-box">
+
+                <h2>Add Expense</h2>
+
+                <input
+                    type="text"
+                    id="expenseName"
+                    placeholder="Expense Name"
+                >
+
+                <input
+                    type="number"
+                    id="expenseValue"
+                    placeholder="Amount"
+                >
+
+                <button class="save-button"
+                        onclick="addExpense()">
+                    Add Expense
+                </button>
+
+            </div>
+
+
+            <div class="table-box">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+                            <th>Expense</th>
+                            <th>Amount</th>
+                            <th>Action</th>
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="expenseTable">
+
+                        <tr>
+
+                            <td>🌱 Seeds</td>
+
+                            <td>₹5,000</td>
+
+                            <td>
+                                <button
+                                    class="delete"
+                                    onclick="deleteExpense(this)">
+                                    Delete
+                                </button>
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>🧪 Fertilizer</td>
+
+                            <td>₹3,500</td>
+
+                            <td>
+                                <button
+                                    class="delete"
+                                    onclick="deleteExpense(this)">
+                                    Delete
+                                </button>
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>💊 Pesticides</td>
+
+                            <td>₹2,500</td>
+
+                            <td>
+                                <button
+                                    class="delete"
+                                    onclick="deleteExpense(this)">
+                                    Delete
+                                </button>
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+        <!-- Weather Page -->
+
+        <section id="weather" class="page hidden">
+
+            <div class="section-header">
+
+                <div>
+                    <h2>Weather Information</h2>
+
+                    <p>
+                        Weather information for farm planning.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="weather-card">
+
+                <div class="big-weather">
+                    ☀️
+                </div>
+
+                <h1>29°C</h1>
+
+                <h2>Partly Sunny</h2>
+
+                <div class="weather-details">
+
+                    <div>
+                        💧
+                        <strong>65%</strong>
+                        <small>Humidity</small>
+                    </div>
+
+                    <div>
+                        💨
+                        <strong>12 km/h</strong>
+                        <small>Wind Speed</small>
+                    </div>
+
+                    <div>
+                        🌧️
+                        <strong>10%</strong>
+                        <small>Rain Chance</small>
+                    </div>
+
+                    <div>
+                        🌡️
+                        <strong>31°C</strong>
+                        <small>Maximum</small>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="tip">
+
+                💡 <strong>Farming Tip:</strong>
+
+                Weather conditions are suitable for
+                irrigation and routine crop maintenance today.
+
+            </div>
+
+        </section>
+
+    </div>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
